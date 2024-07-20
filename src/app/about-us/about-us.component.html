@@ -1,0 +1,38 @@
+<div id="about-us-container" class="background-container">
+  <header>
+    <h1>About Us</h1>
+    <br />
+    <div class="container">
+      <ul>
+        <li>
+          <a routerLink="company-profile" routerLinkActive="active"
+            >Company Profile</a
+          >
+        </li>
+        <li><a routerLink="history" routerLinkActive="active">History</a></li>
+        <li><a routerLink="team" routerLinkActive="active">Team</a></li>
+        <li><a routerLink="join-us" routerLinkActive="active">Join Us</a></li>
+      </ul>
+    </div>
+  </header>
+  <div id="content" class="content">
+    <router-outlet></router-outlet>
+  </div>
+  <footer>
+    <div class="footer-content">
+      <div class="footer-navigation">
+        <ul class="footer-nav">
+          <li><a routerLink="/">Home</a></li>
+          <li><a routerLink="/properties-for-sale">Properties For Sale</a></li>
+          <li><a routerLink="/list-property">List A Property</a></li>
+          <li><a routerLink="/wishlist">Wishlist</a></li>
+          <li><a routerLink="/about-us">About Us</a></li>
+          <li><a routerLink="/contact-us">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Real-Key Properties. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</div>

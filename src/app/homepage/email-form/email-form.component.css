@@ -1,0 +1,79 @@
+.whole-div {
+    background-image: url('/assets/images/backgrounds/family.jpg');
+    background-size: cover;
+    background-position: center;
+    border: solid 5px white;
+    padding: 5px;
+}
+
+h2 {
+    color: white;
+}
+
+h4 {
+    color: white;
+}
+
+form {
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: rgba(170, 170, 241, 0.2);
+}
+
+form div {
+    margin-bottom: 15px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: left;
+}
+
+form input,
+form select {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
+form input::placeholder,
+form select {
+    color: #fff;
+    opacity: 1;
+}
+
+form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+small {
+    color: white;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-container label {
+    margin-right: 10px;
+}

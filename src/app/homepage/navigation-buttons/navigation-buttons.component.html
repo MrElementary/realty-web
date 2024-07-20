@@ -1,0 +1,14 @@
+<div class="login-container">
+  <button *ngIf="!isLoggedIn()" (click)="showLoginForm()">Login</button>
+  <button *ngIf="isLoggedIn()" (click)="logout()">Logout</button>
+</div>
+<div class="buttons-container">
+  <button (click)="onHomeClick()">Home</button>
+  <button (click)="onSalesClick()">Properties For Sale</button>
+  <button (click)="onListAPropertyClick()">List A Property</button>
+  <button (click)="onWishlistClick()" [disabled]="!isLoggedIn()">
+    Wishlist
+  </button>
+  <button (click)="onAboutUsClick()">About Us</button>
+  <button (click)="onContactUsClick()">Contact Us</button>
+</div>

@@ -1,0 +1,68 @@
+.buttons-container {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.buttons-container button {
+    background: rgb(207, 207, 247);
+    border-radius: 999px;
+    box-shadow: #5E5DF0 0 10px 20px -10px;
+    box-sizing: border-box;
+    color: black;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    opacity: 1;
+    outline: 0 solid transparent;
+    padding: 8px 18px;
+    width: 14%;
+    border: 0;
+    margin: 0 10px;
+    border: solid 3px rgb(56, 61, 220);
+    cursor: pointer;
+}
+
+.buttons-container button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.buttons-container button:hover {
+    scale: 1.2;
+}
+
+.login-container {
+    margin-top: 100px;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.login-container button {
+    /* margin-left: 10px; */
+    background: rgb(207, 207, 247);
+    border-radius: 999px;
+    box-shadow: #5E5DF0 0 10px 20px -10px;
+    box-sizing: border-box;
+    color: black;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    opacity: 1;
+    outline: 0 solid transparent;
+    padding: 8px 18px;
+    width: 14%;
+    border: 0;
+    margin: 0 10px;
+    border: solid 3px rgb(56, 61, 220);
+    cursor: pointer;
+}
+
+.login-container button:hover {
+    scale: 1.2;
+}

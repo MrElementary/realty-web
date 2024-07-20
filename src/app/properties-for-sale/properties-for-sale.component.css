@@ -1,0 +1,305 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: white;
+}
+
+header {
+    width: 100%;
+    background-color: #0766AD;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+/* Filters section styling */
+.filters {
+    margin-bottom: 1em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    align-items: center;
+    padding: 5px;
+    background-color: #FFF6E9;
+    border: 5px solid #29ADB2;
+    border-radius: 10px;
+    width: 100%;
+    /* Ensure filters section fills the full width */
+    box-sizing: border-box;
+    /* Include padding in the width calculation */
+    max-width: 1000px;
+    /* Limit the width of the filter section */
+    margin: 0 auto;
+    /* Center the filter section */
+    box-sizing: border-box;
+    /* Include padding in the width calculation */
+}
+
+.filters label {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-bottom: 0.5em;
+    font-size: 1em;
+    color: #333;
+}
+
+/* Filter group styling */
+.filter-group {
+    flex: 1 1 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-group input,
+.filter-group select {
+    padding: 0.25em;
+    font-size: 0.75em;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+button#applyFilters {
+    padding: 0.25em 0.5em;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: #29ADB2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+button#applyFilters:hover {
+    background-color: #217F81;
+}
+
+/*property list styling*/
+
+.property-list {
+    display: block;
+}
+
+.property-card {
+    background-color: #C5E898;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1em;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.property-card .property-images {
+    display: flex;
+    flex-wrap: nowrap;
+    flex: 1 1 30%;
+    gap: 0.5em;
+    padding: 1em;
+}
+
+.property-card .property-images img {
+    flex-grow: 1;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    cursor: pointer;
+    border: 3.5px solid #29ADB2
+}
+
+.property-card:hover {
+    background-color: hsl(86, 74%, 82%);
+    border: 2px solid #C5E898;
+    border-radius: 10px;
+}
+
+/* Lightbox styles */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.lightbox-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* Navigation buttons */
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    transition: 0.3s;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+.prev {
+    left: 10px;
+    border-radius: 3px 0 0 3px;
+}
+
+.next {
+    right: 10px;
+    border-radius: 0 3px 3px 0;
+}
+
+.prev:hover,
+.next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/*property info in cards*/
+.property-card .property-info {
+    flex: 1 1 70%;
+    padding: 1em;
+}
+
+.property-card h2 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.property-card p {
+    margin: 0.5em 0;
+}
+
+.property-card .price {
+    font-weight: bold;
+    color: #0766AD;
+}
+
+.enquiry-link {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #29ADB2;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.enquiry-link:hover {
+    background-color: #217F81;
+}
+
+footer {
+    margin-top: 50px;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: rgb(56, 61, 220);
+    color: white;
+    padding: 40px 0;
+    font-weight: bold;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    /* Ensure the content is in a column layout */
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-navigation {
+    margin-bottom: 20px;
+}
+
+.footer-nav {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.footer-nav li {
+    margin: 0 15px;
+}
+
+.footer-nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.footer-nav a:hover {
+    color: #080808;
+    /* Dark color on hover */
+}
+
+.footer-bottom {
+    width: 100%;
+    /* Ensure it takes the full width of the footer */
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    border-top: 1px solid #444;
+    padding-top: 10px;
+}
+
+.footer-bottom p {
+    margin: 0;
+}

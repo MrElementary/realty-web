@@ -1,0 +1,108 @@
+<header class="header">
+  <h1>Properties for Sale</h1>
+</header>
+<main>
+  <br />
+  <section id="filters" class="filters">
+    <div class="filter-group">
+      <label for="typeFilter">Type:</label>
+      <select id="typeFilter">
+        <option value="all">All</option>
+        <option value="House">House</option>
+        <option value="Flat">Flat</option>
+        <option value="Plot">Plot</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label for="priceFilter">Max Price:</label>
+      <input type="number" id="priceFilter" placeholder="Enter max price" />
+    </div>
+
+    <div class="filter-group">
+      <label for="roomsFilter">Min Rooms:</label>
+      <input type="number" id="roomsFilter" placeholder="Enter min rooms" />
+    </div>
+
+    <div class="filter-group">
+      <label for="areaFilter">Area:</label>
+      <input type="text" id="areaFilter" placeholder="Enter area" />
+    </div>
+
+    <div class="button-container">
+      <button id="applyFilters">Apply Filters</button>
+    </div>
+  </section>
+
+  <br />
+
+  <section id="property-list" class="property-list">
+    <!-- Property cards will be inserted here -->
+    <div
+      *ngFor="let property of properties"
+      class="property-card"
+      [id]="'property-' + property.property_name"
+    >
+      <div class="property-images">
+        <a
+          *ngFor="let url of property.images.slice(0, 5)"
+          href="#"
+          (click)="openLightbox($event, property)"
+        >
+          <img
+            [src]="url"
+            [alt]="property.type"
+            [attr.data-property-id]="property.property_name"
+            [attr.data-index]="property.images.indexOf(url)"
+          />
+        </a>
+      </div>
+      <div class="property-info">
+        <h2>{{ property.type }}: {{ property.property_name }}</h2>
+        <p>{{ property.description }}</p>
+        <p class="price">R{{ property.price | number }}</p>
+        <p>{{ property.address }}</p>
+        <p>
+          {{ property.nrBathrooms }} bathrooms,
+          {{ property.nrBedrooms }} bedrooms, {{ property.nrFloors }} floors
+        </p>
+        <p>
+          Garden: {{ property.garden ? "Yes" : "No" }}, Power Backup:
+          {{ property.powerBackUp ? "Yes" : "No" }}
+        </p>
+        <a
+          [routerLink]="['/contact-us']"
+          [queryParams]="{ property: property.property_name }"
+          class="enquiry-link"
+          >Enquire about this property</a
+        >
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Lightbox Modal -->
+<div id="lightbox" class="lightbox">
+  <span class="close" (click)="closeLightbox()">&times;</span>
+  <img class="lightbox-content" id="lightbox-image" />
+  <div id="caption"></div>
+  <a class="prev" id="prev" (click)="navigateLightbox(-1)">&lt;</a>
+  <a class="next" id="next" (click)="navigateLightbox(1)">&gt;</a>
+</div>
+<footer>
+  <div class="footer-content">
+    <div class="footer-navigation">
+      <ul class="footer-nav">
+        <li><a routerLink="/">Home</a></li>
+        <li><a routerLink="/properties-for-sale">Properties For Sale</a></li>
+        <li><a routerLink="/list-a-property">List A Property</a></li>
+        <li><a routerLink="/wishlist">Wishlist</a></li>
+        <li><a routerLink="/about-us">About Us</a></li>
+        <li><a routerLink="/contact-us">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Real-Key Properties. All rights reserved.</p>
+    </div>
+  </div>
+</footer>

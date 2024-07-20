@@ -1,0 +1,128 @@
+<div class="whole-div">
+  <h2>Marketing Price Assessment</h2>
+  <h4>
+    Complete our contact form below and one of our agents will be in touch to
+    view your property
+  </h4>
+  <div class="assessmentForm">
+    <form [formGroup]="priceAssessmentForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="firstName">First Name: </label>
+        <input type="text" id="firstName" formControlName="firstName" />
+        <div
+          *ngIf="
+            (priceAssessmentForm.get('firstName')!.invalid &&
+              priceAssessmentForm.get('firstName')!.touched) ||
+            priceAssessmentForm.get('firstName')!.dirty
+          "
+        >
+          <small
+            *ngIf="priceAssessmentForm.get('firstName')!.errors?.['required']"
+            >First Name is required</small
+          >
+        </div>
+      </div>
+
+      <div>
+        <label for="lastName">Last Name: </label>
+        <input type="text" id="'lastName" formControlName="lastName" />
+        <div
+          *ngIf="
+            (priceAssessmentForm.get('lastName')!.invalid &&
+              priceAssessmentForm.get('lastName')!.touched) ||
+            priceAssessmentForm.get('lastName')!.dirty
+          "
+        >
+          <small
+            *ngIf="priceAssessmentForm.get('lastName')!.errors?.['required']"
+            >Last Name is required</small
+          >
+        </div>
+      </div>
+
+      <div>
+        <label for="emailAdress">Email address: </label>
+        <input type="email" id="emailAddress" formControlName="emailAddress" />
+        <div
+          *ngIf="
+            (priceAssessmentForm.get('emailAddress')!.invalid &&
+              priceAssessmentForm.get('emailAddress')!.touched) ||
+            priceAssessmentForm.get('emailAddress')!.dirty
+          "
+        >
+          <small
+            *ngIf="priceAssessmentForm.get('emailAddress')!.errors?.['required']"
+          >
+            Email address is required
+          </small>
+        </div>
+      </div>
+
+      <div>
+        <label for="phoneNumber">Phone Number: </label>
+        <input type="number" id="phoneNumber" formControlName="phoneNumber" />
+        <div
+          *ngIf="
+            (priceAssessmentForm.get('phoneNumber')!.invalid &&
+              priceAssessmentForm.get('phoneNumber')!.touched) ||
+            priceAssessmentForm.get('phoneNumber')!.dirty
+          "
+        >
+          <small
+            *ngIf="priceAssessmentForm.get('phoneNumber')!.errors?.['required']"
+          ></small>
+        </div>
+      </div>
+
+      <div>
+        <label for="valuationDate">Valuation Date: </label>
+        <input type="date" id="valuationDate" formControlName="valuationDate" />
+        <div
+          *ngIf="
+            (priceAssessmentForm.get('valuationDate')!.invalid &&
+              priceAssessmentForm.get('valuationDate')!.touched) ||
+            priceAssessmentForm.get('valuationDate')!.dirty
+          "
+        >
+          <small
+            *ngIf="priceAssessmentForm.get('valuationDate')!.errors?.['required']"
+            >Valuation date is required</small
+          >
+        </div>
+      </div>
+
+      <div>
+        <label for="propertyTypes"> Property Type: </label>
+        <select id="propertyType" formControlName="propertyType">
+          <option *ngFor="let property of propertyTypes" [value]="property.id">
+            {{ property.type }}
+          </option>
+        </select>
+      </div>
+
+      <div>
+        <label for="propertyLocation">Property Location: </label>
+        <input id="propertyLocation" formControlName="propertyLocation" />
+        <div
+          *ngIf="
+            (priceAssessmentForm.get('propertyLocation')!.invalid &&
+              priceAssessmentForm.get('propertyLocation')!.touched) ||
+            priceAssessmentForm.get('propertyLocation')!.dirty
+          "
+        >
+          <small
+            *ngIf="priceAssessmentForm.get('propertyLocation')!.errors?.['required']"
+            >Property location is required</small
+          >
+        </div>
+      </div>
+
+      <div class="checkbox-container">
+        <label for="solar">Does the property have a solar installation? </label>
+        <input id="solar" type="checkbox" formControlName="solar" />
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+<div id="about-us-container" class="background-container">
+  <header class="header">
+    <h1>List A Property</h1>
+  </header>
+
+  <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()">
+    <label for="person_name">Name: </label>
+    <input id="person_name" formControlName="person_name" type="text" />
+
+    <label for="property_name">Property Name: </label>
+    <input id="property_name" formControlName="property_name" type="text" />
+
+    <label for="address">Address: </label>
+    <input id="address" formControlName="address" type="text" />
+
+    <label for="price">Price: </label>
+    <input id="price" formControlName="price" type="number" />
+
+    <label for="type">Type: </label>
+    <input id="type" formControlName="type" type="text" />
+
+    <label for="bedroom">Bedrooms: </label>
+    <input id="bedroom" formControlName="bedroom" type="number" />
+
+    <label for="bathroom">Bathrooms: </label>
+    <input id="bathroom" formControlName="bathroom" type="number" />
+
+    <label for="total_floors">Total Floors: </label>
+    <input id="total_floors" formControlName="total_floors" type="number" />
+
+    <label for="garden">Garden </label>
+    <input id="garden" formControlName="garden" type="checkbox" />
+
+    <label for="power">Power </label>
+    <input id="power" formControlName="power" type="checkbox" />
+
+    <label for="description">Description: </label>
+    <textarea id="description" formControlName="description"></textarea>
+
+    <label for="images">Images</label>
+    <input id="images" type="file" (change)="onFileChange($event)" multiple />
+
+    <button type="submit" id="routeSubmit">Submit</button>
+  </form>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-navigation">
+        <ul class="footer-nav">
+          <li><a routerLink="/">Home</a></li>
+          <li><a routerLink="/properties-for-sale">Properties For Sale</a></li>
+          <li><a routerLink="/list-a-property">List A Property</a></li>
+          <li><a routerLink="/wishlist">Wishlist</a></li>
+          <li><a routerLink="/about-us">About Us</a></li>
+          <li><a routerLink="/contact-us">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Real-Key Properties. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</div>

@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+}
+
+@keyframes slide {
+    from{
+        transform: translateX(0)
+    }
+    to{
+        transform: translateX(-50%);
+    }
+}
+
+.houses {
+    overflow: hidden;
+    padding: 5px 0px;
+    white-space: nowrap;
+    position: relative;
+}
+
+.houses:before,
+.houses:after {
+    position: absolute;
+        top: 0;
+        width: 250px;
+        height: 100%;
+        content: "";
+        z-index: 2;
+}
+
+.houses:before {
+    left: 0;
+    background: linear-gradient(to left, transparent, rgb(207, 207, 247));
+}
+
+.houses:after { 
+    right: 0;
+    background: linear-gradient(to right, transparent, rgb(207, 207, 247));
+}
+
+.houses:hover .houses-slide {
+    animation-play-state: paused;
+}
+
+.houses-slide {
+    display: inline-block;
+    animation: 40s slide infinite linear;
+}
+
+.houses-slide img {
+    height: 200px;
+    margin: 0 10px;
+}
+
