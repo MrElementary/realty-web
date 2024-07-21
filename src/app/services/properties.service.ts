@@ -7,7 +7,7 @@ import { Property } from '../properties-for-sale/propertiesModel';
   providedIn: 'root'
 })
 export class PropertyService {
-  private apiUrl = 'http://localhost:5000/api/v1';
+  private apiUrl = 'https://propertyflaskapp.onrender.com/api/v1';
 
   constructor(private http: HttpClient) { }
 
