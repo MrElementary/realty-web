@@ -26,5 +26,6 @@ export class Property implements Property {
         public powerBackUp: boolean,
         public description: string,
         public imageUrls: string[],
+        public wishlist: boolean
     ) {}
 }

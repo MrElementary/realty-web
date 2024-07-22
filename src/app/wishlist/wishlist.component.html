@@ -1,0 +1,80 @@
+<div id="about-us-container" class="background-container">
+  <header class="header">
+    <h1>Wish List</h1>
+  </header>
+  <main>
+    <section id="wishlist-property-list" class="property-list">
+      <!-- Wishlist property cards will be inserted here -->
+      <div
+        *ngFor="let property of wishlistProperties"
+        class="property-card"
+        [id]="'wishlist-property-' + property.property_name"
+      >
+        <div class="property-images">
+          <a
+            *ngFor="let url of property.images.slice(0, 5)"
+            href="#"
+            (click)="openLightbox($event, property)"
+          >
+            <img
+              [src]="url"
+              [alt]="property.type"
+              [attr.data-property-id]="property.property_name"
+              [attr.data-index]="property.images.indexOf(url)"
+            />
+          </a>
+        </div>
+        <div class="property-info">
+          <h2>{{ property.type }}: {{ property.property_name }}</h2>
+          <p>{{ property.description }}</p>
+          <p class="price">R{{ property.price | number }}</p>
+          <p>{{ property.address }}</p>
+          <p>
+            {{ property.nrBathrooms }} bathrooms,
+            {{ property.nrBedrooms }} bedrooms, {{ property.nrFloors }} floors
+          </p>
+          <p>
+            Garden: {{ property.garden ? "Yes" : "No" }}, Power Backup:
+            {{ property.powerBackUp ? "Yes" : "No" }}
+          </p>
+          <button class="wishlist-button" (click)="toggleWishlist(property)">
+            {{ property.wishlist ? "Remove from Wishlist" : "Add to Wishlist" }}
+          </button>
+          <a
+            [routerLink]="['/contact-us']"
+            [queryParams]="{ property: property.property_name }"
+            class="enquiry-link"
+            >Enquire about this property</a
+          >
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="lightbox">
+    <span class="close" (click)="closeLightbox()">&times;</span>
+    <img class="lightbox-content" id="lightbox-image" />
+    <div id="caption"></div>
+    <a class="prev" id="prev" (click)="navigateLightbox(-1)">&lt;</a>
+    <a class="next" id="next" (click)="navigateLightbox(1)">&gt;</a>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-navigation">
+        <ul class="footer-nav">
+          <li><a routerLink="/">Home</a></li>
+          <li><a routerLink="/properties-for-sale">Properties For Sale</a></li>
+          <li><a routerLink="/list-a-property">List A Property</a></li>
+          <li><a routerLink="/wishlist">Wishlist</a></li>
+          <li><a routerLink="/about-us">About Us</a></li>
+          <li><a routerLink="/contact-us">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Real-Key Properties. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</div>

@@ -96,4 +96,12 @@ export class PropertiesForSaleComponent implements OnInit, AfterViewInit {
       }
     }
   }
+
+  toggleWishlist(property: Property): void {
+  property.wishlist = !property.wishlist;
+  this.propertyService.updateWishlistStatus(property.property_name, property.wishlist).subscribe(
+    response => console.log('Wishlist updated:', response),
+    error => console.error('Error updating wishlist:', error)
+  );
+}
 }

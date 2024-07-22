@@ -59,6 +59,12 @@ export class ListAPropertyComponent implements OnInit {
   for (const key in this.propertyForm.controls) {
     if (this.propertyForm.controls.hasOwnProperty(key)) {
       formObject[key] = this.propertyForm.get(key)?.value;
+
+      if (key === 'garden' || key === 'power') {
+        formObject[key] = this.propertyForm.get(key)?.value? 'yes' : 'no'
+      } else {
+        formObject[key] = this.propertyForm.get(key)?.value;
+      }
     }
   }
 

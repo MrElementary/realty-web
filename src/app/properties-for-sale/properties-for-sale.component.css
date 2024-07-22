@@ -241,6 +241,23 @@ button#applyFilters:hover {
     background-color: #217F81;
 }
 
+.wishlist-button {
+    margin-right: 10px;
+    display: inline-block;
+    margin-top: 10px;
+    padding: 12px 22px;
+    background-color: #29ADB2;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.wishlist-button:hover {
+    background-color: #217F81;
+}
+
 footer {
     margin-top: 50px;
     padding: 0;

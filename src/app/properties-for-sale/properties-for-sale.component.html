@@ -70,6 +70,9 @@
           Garden: {{ property.garden ? "Yes" : "No" }}, Power Backup:
           {{ property.powerBackUp ? "Yes" : "No" }}
         </p>
+        <button class="wishlist-button" (click)="toggleWishlist(property)">
+          {{ property.wishlist ? "Remove from Wishlist" : "Add to Wishlist" }}
+        </button>
         <a
           [routerLink]="['/contact-us']"
           [queryParams]="{ property: property.property_name }"
