@@ -11,10 +11,6 @@ export class PropertyService {
 
   constructor(private http: HttpClient) { }
 
-  // fetchProperties(): Observable<Property[]> {
-  //   return this.http.get<Property[]>(`${this.apiUrl}/retrievedata`);
-  // }
-
   fetchProperties(): Observable<Property[]> {
     return this.http.get<{ [key: string ]: Property }>(`${this.apiUrl}/retrievedata`).pipe(
       map(response => Object.values(response))

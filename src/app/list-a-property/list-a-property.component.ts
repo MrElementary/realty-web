@@ -52,22 +52,42 @@ export class ListAPropertyComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const formData = new FormData();
-    for (const key in this.propertyForm.controls) {
-      if (this.propertyForm.controls.hasOwnProperty(key)) {
-        formData.append(key, this.propertyForm.get(key)?.value);
-      }
-    }
+  const formData = new FormData();
 
-    for (const file of this.selectedFiles) {
-      formData.append('images', file);
+  // Collecting form data
+  const formObject: any = {};
+  for (const key in this.propertyForm.controls) {
+    if (this.propertyForm.controls.hasOwnProperty(key)) {
+      formObject[key] = this.propertyForm.get(key)?.value;
     }
-
-    this.propertyService.storeProperty(formData).subscribe(
-      (response: any) => console.log(response),
-      (error: any) => console.error('Error', error)
-    )
   }
+
+  // Adding form data as a JSON string under the key 'data'
+  formData.append('data', JSON.stringify(formObject));
+
+  // Adding selected files to the form data
+  for (const file of this.selectedFiles) {
+    formData.append('images', file);
+  }
+
+  // Log FormData entries for debugging
+  formData.forEach((value, key) => {
+    console.log(`${key}: ${value}`);
+  });
+
+  this.propertyService.storeProperty(formData).subscribe(
+    (response: any) => {
+      console.log(response);
+      this.resetForm();
+    },
+    (error: any) => console.error('Error', error)
+  );
+}
+
+resetForm(): void {
+  this.propertyForm.reset(); // Reset form controls
+  this.selectedFiles = []; // Clear selected files
+}
 
   changeBackgroundImage(): void {
     const container = document.getElementById('about-us-container');
