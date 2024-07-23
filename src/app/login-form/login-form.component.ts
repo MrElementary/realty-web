@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -31,6 +32,7 @@ export class LoginFormComponent {
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<LoginFormComponent>,
     private authService: AuthService,
+    private toastrService: ToastrService
   ) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
@@ -48,15 +50,15 @@ export class LoginFormComponent {
 
         if (user) {
           this.authService.setUsername(username);
-          alert(`User logged in: ${username}`);
+          this.toastrService.success(`User logged in: ${username}`);
         } else {
-          alert('Invalid username or password');
+          this.toastrService.warning('Invalid username or password');
         }
       } else {
         const users = JSON.parse(localStorage.getItem('users') || '[]');
         users.push({ username, password });
         localStorage.setItem('users', JSON.stringify(users));
-        alert(`User registered: ${username}`);
+        this.toastrService.success(`User registered: ${username}`);
       }
 
       this.dialogRef.close(this.loginForm.value);

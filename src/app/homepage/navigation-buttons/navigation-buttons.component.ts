@@ -49,7 +49,6 @@ export class NavigationButtonsComponent {
   }
 
   showLoginForm() {
-    console.log('Opening login form...');
     const dialogRef = this.dialog.open(LoginFormComponent, {
       width: '500px',
       height: '390px',
@@ -57,7 +56,6 @@ export class NavigationButtonsComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('Dialog closed', result);
     });
   }
 

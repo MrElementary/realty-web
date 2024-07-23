@@ -70,7 +70,11 @@
           Garden: {{ property.garden ? "Yes" : "No" }}, Power Backup:
           {{ property.powerBackUp ? "Yes" : "No" }}
         </p>
-        <button class="wishlist-button" (click)="toggleWishlist(property)">
+        <button
+          class="wishlist-button"
+          (click)="toggleWishlist(property)"
+          [disabled]="!isLoggedIn()"
+        >
           {{ property.wishlist ? "Remove from Wishlist" : "Add to Wishlist" }}
         </button>
         <a

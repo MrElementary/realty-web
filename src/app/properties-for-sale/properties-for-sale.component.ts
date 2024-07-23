@@ -4,6 +4,7 @@ import { AuthService } from '../services/AuthService.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { PropertyService } from '../services/properties.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-properties-for-sale',
@@ -20,12 +21,12 @@ export class PropertiesForSaleComponent implements OnInit, AfterViewInit {
 
   constructor(
     private authService: AuthService,
-    private propertyService: PropertyService
+    private propertyService: PropertyService,
+    private toastrService: ToastrService
   ) {}
 
   ngOnInit(): void {
     this.username = this.authService.getUsername();
-    console.log('User logged in', this.username);
     this.fetchProperties();
   }
 
@@ -36,14 +37,13 @@ export class PropertiesForSaleComponent implements OnInit, AfterViewInit {
   fetchProperties(): void {
     this.propertyService.fetchProperties().subscribe(
       data => {
-        console.log('Fetched properties: ', data);
         if (Array.isArray(data)) {
           this.properties = data;
         } else {
-          console.error('Data is not an array: ', data)
+          this.toastrService.warning('Data is not an array: ', data)
         }
       },
-      error => console.error('Error fetching properties:', error)
+      error => this.toastrService.warning('Error fetching properties:', error)
     );
   }
 
@@ -100,8 +100,12 @@ export class PropertiesForSaleComponent implements OnInit, AfterViewInit {
   toggleWishlist(property: Property): void {
   property.wishlist = !property.wishlist;
   this.propertyService.updateWishlistStatus(property.property_name, property.wishlist).subscribe(
-    response => console.log('Wishlist updated:', response),
-    error => console.error('Error updating wishlist:', error)
+    response => this.toastrService.success('Wishlist updated.'),
+    error => this.toastrService.warning('Error updating wishlist.')
   );
+}
+
+isLoggedIn() {
+  return this.authService.getUsername() != null;
 }
 }

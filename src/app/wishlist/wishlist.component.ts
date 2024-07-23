@@ -3,6 +3,7 @@ import { Property } from '../properties-for-sale/propertiesModel';
 import { PropertyService } from '../services/properties.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-wishlist',
@@ -16,7 +17,10 @@ export class WishlistComponent implements OnInit {
   currentPropertyImages: HTMLImageElement[] = [];
   currentImageIndex = 0;
 
-  constructor(private propertyService: PropertyService) {}
+  constructor(
+    private propertyService: PropertyService,
+    private toastrService: ToastrService
+    ) {}
 
   ngOnInit(): void {
     this.fetchWishlistProperties();
@@ -27,7 +31,7 @@ export class WishlistComponent implements OnInit {
       data => {
         this.wishlistProperties = data.filter(property => property.wishlist);
       },
-      error => console.error('Error fetching wishlist properties:', error)
+      error => this.toastrService.warning('Error fetching wishlist properties.')
     );
   }
 
@@ -35,10 +39,10 @@ export class WishlistComponent implements OnInit {
     property.wishlist = !property.wishlist;
     this.propertyService.updateWishlistStatus(property.property_name, property.wishlist).subscribe(
       response => {
-        console.log('Wishlist updated:', response);
-        this.fetchWishlistProperties(); // Refresh the wishlist after update
+        this.toastrService.success('Wishlist updated.');
+        this.fetchWishlistProperties();
       },
-      error => console.error('Error updating wishlist:', error)
+      error => this.toastrService.warning('Error updating wishlist.')
     );
   }
 

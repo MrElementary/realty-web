@@ -39,5 +39,5 @@ export class PropertyService {
 
   updateWishlistStatus(propertyName: string, wishlist: boolean): Observable<any> {
   return this.http.patch(`${this.apiUrl}/updatewishlist`, { propertyName, wishlist });
-}
+  }
 }

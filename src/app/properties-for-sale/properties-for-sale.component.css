@@ -257,6 +257,10 @@ button#applyFilters:hover {
 .wishlist-button:hover {
     background-color: #217F81;
 }
+.wishlist-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
 
 footer {
     margin-top: 50px;

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-contact-us',
@@ -25,7 +26,10 @@ export class ContactUsComponent implements OnInit {
   currentIndex: number = 0;
   intervalId: any;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private toastrService: ToastrService
+    ) {
     this.contactForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -55,7 +59,12 @@ export class ContactUsComponent implements OnInit {
 
   onSubmit(): void {
     if (this.contactForm.valid) {
-      console.log(this.contactForm.value);
+      this.toastrService.success('Thank you! We will be in touch!');
+      this.resetForm();
     }
+  }
+
+  resetForm(){
+    this.contactForm.reset();
   }
 }

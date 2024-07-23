@@ -1,14 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { PropertyService } from '../services/properties.service';
 import { ImageService } from '../services/image.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-list-a-property',
   standalone: true,
-  imports: [CommonModule, RouterModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    ReactiveFormsModule,
+    ],
   templateUrl: './list-a-property.component.html',
   styleUrl: './list-a-property.component.css'
 })
@@ -23,6 +28,8 @@ export class ListAPropertyComponent implements OnInit {
     private fb: FormBuilder,
     private propertyService: PropertyService,
     private imageService: ImageService,
+    private router: Router,
+    private toastrService: ToastrService
 
   ) {
     this.propertyForm = this.fb.group({
@@ -54,7 +61,6 @@ export class ListAPropertyComponent implements OnInit {
   onSubmit(): void {
   const formData = new FormData();
 
-  // Collecting form data
   const formObject: any = {};
   for (const key in this.propertyForm.controls) {
     if (this.propertyForm.controls.hasOwnProperty(key)) {
@@ -68,31 +74,29 @@ export class ListAPropertyComponent implements OnInit {
     }
   }
 
-  // Adding form data as a JSON string under the key 'data'
   formData.append('data', JSON.stringify(formObject));
 
-  // Adding selected files to the form data
   for (const file of this.selectedFiles) {
     formData.append('images', file);
   }
 
-  // Log FormData entries for debugging
-  formData.forEach((value, key) => {
-    console.log(`${key}: ${value}`);
-  });
-
   this.propertyService.storeProperty(formData).subscribe(
     (response: any) => {
-      console.log(response);
+      this.toastrService.success('Your property has been listed successfully!');
       this.resetForm();
+      setTimeout(() => {
+        this.router.navigate(['/']);
+      }, 3500)
     },
-    (error: any) => console.error('Error', error)
+    (error: any) => {
+      this.toastrService.warning('Failed to list your property.', error)
+  }
   );
 }
 
 resetForm(): void {
-  this.propertyForm.reset(); // Reset form controls
-  this.selectedFiles = []; // Clear selected files
+  this.propertyForm.reset();
+  this.selectedFiles = [];
 }
 
   changeBackgroundImage(): void {

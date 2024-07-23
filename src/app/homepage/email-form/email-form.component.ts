@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PropertyTypes, propertyTypes } from './propertyTypes.model';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -26,9 +27,17 @@ export class EmailFormComponent {
     solar: ['']
   });
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private toastrService: ToastrService) {}
 
   onSubmit() {
-    console.log('FORM VALUES', this.priceAssessmentForm.value);
+    this.toastrService.success('Your form has been submitted successfully. An agent will be in touch shortly!');
+    this.resetForm();
   }
+
+  resetForm(): void {
+  this.priceAssessmentForm.reset();
+}
+
 }
