@@ -11,6 +11,7 @@ export interface Property {
   power: string;
   description: string;
   images: string[];
+  wishlist: boolean;
 }
 export class Property implements Property {
     constructor(

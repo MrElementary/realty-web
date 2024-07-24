@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './properties-for-sale.component.html',
   styleUrls: ['./properties-for-sale.component.css']
 })
-export class PropertiesForSaleComponent implements OnInit, AfterViewInit {
+export class PropertiesForSaleComponent implements OnInit {
   properties: Property[] = [];
   currentPropertyImages: HTMLImageElement[] = [];
   currentImageIndex = 0;
@@ -30,15 +30,15 @@ export class PropertiesForSaleComponent implements OnInit, AfterViewInit {
     this.fetchProperties();
   }
 
-  ngAfterViewInit(): void {
-    document.getElementById('applyFilters')?.addEventListener('click', () => this.applyFilters());
-  }
-
   fetchProperties(): void {
     this.propertyService.fetchProperties().subscribe(
       data => {
+        console.log('Data: ', data)
         if (Array.isArray(data)) {
-          this.properties = data;
+          this.properties = data.map(property => ({
+            ...property,
+            wishlist: property.wishlist || false
+          }));
         } else {
           this.toastrService.warning('Data is not an array: ', data)
         }
@@ -47,12 +47,22 @@ export class PropertiesForSaleComponent implements OnInit, AfterViewInit {
     );
   }
 
-  applyFilters(): void {
-    const typeFilter = (document.getElementById('typeFilter') as HTMLSelectElement).value;
-    const priceFilter = parseInt((document.getElementById('priceFilter') as HTMLInputElement).value) || Infinity;
-    const roomsFilter = parseInt((document.getElementById('roomsFilter') as HTMLInputElement).value) || 0;
-    const areaFilter = (document.getElementById('areaFilter') as HTMLInputElement).value.toLowerCase();
+  fetchWishlistProperties(): void {
+    if (this.username) {
+      this.propertyService.fetchFavorites(this.username).subscribe(
+        data => {
+          if (Array.isArray(data)) {
+            this.properties = data.filter(property => property.wishlist);
+          } else {
+            this.toastrService.warning('Data is not an array: ', data)
+          }
+        },
+        error => this.toastrService.warning('Error fetching wishlisted properties:', error)
+      );
+    }
+  }
 
+  applyFilters(typeFilter: string, priceFilter: number, roomsFilter: number, areaFilter: string): void {
     this.properties = this.properties.filter(property => {
       return (typeFilter === 'all' || property.type === typeFilter) &&
              (property.price <= priceFilter) &&
@@ -98,14 +108,27 @@ export class PropertiesForSaleComponent implements OnInit, AfterViewInit {
   }
 
   toggleWishlist(property: Property): void {
-  property.wishlist = !property.wishlist;
-  this.propertyService.updateWishlistStatus(property.property_name, property.wishlist).subscribe(
-    response => this.toastrService.success('Wishlist updated.'),
-    error => this.toastrService.warning('Error updating wishlist.')
-  );
-}
+    if (this.username) {
+      property.wishlist = !property.wishlist;
+      const wishlistMethod = property.wishlist ? 'addToWishlist' : 'removeFromWishlist';
 
-isLoggedIn() {
-  return this.authService.getUsername() != null;
-}
+      console.log(`Calling ${wishlistMethod} with`, { username: this.username, propertyName: property.property_name });
+
+      this.propertyService[wishlistMethod](this.username, property.property_name).subscribe(
+        response => {
+          this.toastrService.success('Wishlist updated.');
+          if (property.wishlist) {
+            this.fetchWishlistProperties();
+          } else {
+            this.fetchProperties();
+          }
+        },
+        error => this.toastrService.warning('Error updating wishlist.')
+      );
+    }
+  }
+
+  isLoggedIn() {
+    return this.authService.getUsername() != null;
+  }
 }
