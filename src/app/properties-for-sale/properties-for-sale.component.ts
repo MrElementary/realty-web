@@ -28,6 +28,9 @@ export class PropertiesForSaleComponent implements OnInit {
   ngOnInit(): void {
     this.username = this.authService.getUsername();
     this.fetchProperties();
+    this.propertyService.wishlist$.subscribe(() => {
+      this.updatePropertiesWishlistStatus()
+    })
   }
 
   fetchProperties(): void {
@@ -45,6 +48,12 @@ export class PropertiesForSaleComponent implements OnInit {
       },
       error => this.toastrService.warning('Error fetching properties:', error)
     );
+  }
+
+  updatePropertiesWishlistStatus(): void {
+    this.properties.forEach(property => {
+      property.wishlist = this.propertyService.isInWishlist(property.property_name)
+    });
   }
 
   fetchWishlistProperties(): void {
@@ -108,25 +117,17 @@ export class PropertiesForSaleComponent implements OnInit {
   }
 
   toggleWishlist(property: Property): void {
-    if (this.username) {
-      property.wishlist = !property.wishlist;
-      const wishlistMethod = property.wishlist ? 'addToWishlist' : 'removeFromWishlist';
-
-      console.log(`Calling ${wishlistMethod} with`, { username: this.username, propertyName: property.property_name });
-
-      this.propertyService[wishlistMethod](this.username, property.property_name).subscribe(
+    if (this.username && !property.wishlist) {
+      this.propertyService.addToWishlist(this.username, property).subscribe(
         response => {
-          this.toastrService.success('Wishlist updated.');
-          if (property.wishlist) {
-            this.fetchWishlistProperties();
-          } else {
-            this.fetchProperties();
-          }
+          this.toastrService.success('Added to wishlist.');
+          property.wishlist = true;
         },
-        error => this.toastrService.warning('Error updating wishlist.')
+        error => this.toastrService.warning('Error adding to wishlist.')
       );
     }
   }
+
 
   isLoggedIn() {
     return this.authService.getUsername() != null;

@@ -7,19 +7,144 @@
     text-align: center;
 }
 
-.wishlist-button {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #29ADB2;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+.property-list {
+    display: block;
 }
 
-.wishlist-button:hover {
-    background-color: #217F81;
+.property-card {
+    background-color: #C5E898;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1em;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.property-card .property-images {
+    display: flex;
+    flex-wrap: nowrap;
+    flex: 1 1 30%;
+    gap: 0.5em;
+    padding: 1em;
+}
+
+.property-card .property-images img {
+    flex-grow: 1;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    cursor: pointer;
+    border: 3.5px solid #29ADB2
+}
+
+.property-card:hover {
+    background-color: hsl(86, 74%, 82%);
+    border: 2px solid #C5E898;
+    border-radius: 10px;
+}
+
+/* Lightbox styles */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.lightbox-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* Navigation buttons */
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    transition: 0.3s;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+.prev {
+    left: 10px;
+    border-radius: 3px 0 0 3px;
+}
+
+.next {
+    right: 10px;
+    border-radius: 0 3px 3px 0;
+}
+
+.prev:hover,
+.next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/*property info in cards*/
+.property-card .property-info {
+    flex: 1 1 70%;
+    padding: 1em;
+}
+
+.property-card h2 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.property-card p {
+    margin: 0.5em 0;
+}
+
+.property-card .price {
+    font-weight: bold;
+    color: #0766AD;
 }
 
 footer {
@@ -83,4 +208,56 @@ footer {
 
 .footer-bottom p {
     margin: 0;
+}
+
+.header-bottom p {
+    margin: 0;
+}
+
+.header-navigation {
+    margin-bottom: 20px;
+}
+
+.header-nav {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.header-nav li {
+    margin: 0 15px;
+}
+
+.header-nav a {
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header-nav a:hover {
+    color: #090909;
+    /* Dark color on hover */
+}
+
+.wishlist-button {
+    margin-right: 10px;
+    display: inline-block;
+    margin-top: 10px;
+    padding: 12px 22px;
+    cursor: pointer;
+    background-color: #29ADB2;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.wishlist-button:hover {
+    background-color: #217F81;
 }

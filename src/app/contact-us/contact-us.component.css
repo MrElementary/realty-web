@@ -386,3 +386,38 @@ footer {
 .footer-bottom p {
     margin: 0;
 }
+
+.header-bottom p {
+    margin: 0;
+}
+
+.header-navigation {
+    margin-bottom: 20px;
+}
+
+.header-nav {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.header-nav li {
+    margin: 0 15px;
+}
+
+.header-nav a {
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header-nav a:hover {
+    color: #090909;
+    /* Dark color on hover */
+}
+

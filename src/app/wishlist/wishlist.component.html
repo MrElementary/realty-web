@@ -1,3 +1,13 @@
+<div class="header-navigation">
+  <ul class="header-nav">
+    <li><a routerLink="/">Home</a></li>
+    <li><a routerLink="/properties-for-sale">Properties For Sale</a></li>
+    <li><a routerLink="/list-a-property">List A Property</a></li>
+    <li><a routerLink="/wishlist">Wishlist</a></li>
+    <li><a routerLink="/about-us">About Us</a></li>
+    <li><a routerLink="/contact-us">Contact Us</a></li>
+  </ul>
+</div>
 <div id="about-us-container" class="background-container">
   <header class="header">
     <h1>Wish List</h1>
@@ -30,22 +40,19 @@
           <p class="price">R{{ property.price | number }}</p>
           <p>{{ property.address }}</p>
           <p>
-            {{ property.nrBathrooms }} bathrooms,
-            {{ property.nrBedrooms }} bedrooms, {{ property.nrFloors }} floors
+            {{ property.bathroom }} bathrooms, {{ property.bedroom }} bedrooms,
+            {{ property.total_floors }} floors
           </p>
           <p>
             Garden: {{ property.garden ? "Yes" : "No" }}, Power Backup:
-            {{ property.powerBackUp ? "Yes" : "No" }}
+            {{ property.power ? "Yes" : "No" }}
           </p>
-          <button class="wishlist-button" (click)="toggleWishlist(property)">
-            {{ property.wishlist ? "Remove from Wishlist" : "Add to Wishlist" }}
-          </button>
-          <a
-            [routerLink]="['/contact-us']"
-            [queryParams]="{ property: property.property_name }"
-            class="enquiry-link"
-            >Enquire about this property</a
+          <button
+            class="wishlist-button"
+            (click)="removeFromWishlist(property)"
           >
+            Remove from Wishlist
+          </button>
         </div>
       </div>
     </section>

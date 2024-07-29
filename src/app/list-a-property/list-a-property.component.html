@@ -1,3 +1,13 @@
+<div class="header-navigation">
+  <ul class="header-nav">
+    <li><a routerLink="/">Home</a></li>
+    <li><a routerLink="/properties-for-sale">Properties For Sale</a></li>
+    <li><a routerLink="/list-a-property">List A Property</a></li>
+    <li><a routerLink="/wishlist">Wishlist</a></li>
+    <li><a routerLink="/about-us">About Us</a></li>
+    <li><a routerLink="/contact-us">Contact Us</a></li>
+  </ul>
+</div>
 <div id="about-us-container" class="background-container">
   <header class="header">
     <h1>List A Property</h1>
@@ -40,7 +50,9 @@
     <label for="images">Images</label>
     <input id="images" type="file" (change)="onFileChange($event)" multiple />
 
-    <button type="submit" id="routeSubmit">Submit</button>
+    <button type="submit" id="routeSubmit" [disabled]="propertyForm.invalid">
+      Submit
+    </button>
   </form>
 
   <footer>

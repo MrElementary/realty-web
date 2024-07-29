@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ImageService } from '../services/image.service';
+import { NavigationButtonsComponent } from '../homepage/navigation-buttons/navigation-buttons.component';
 
 @Component({
   selector: 'app-about-us',
   standalone: true,
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, NavigationButtonsComponent],
   templateUrl: './about-us.component.html',
   styleUrls: ['./about-us.component.css']
 })

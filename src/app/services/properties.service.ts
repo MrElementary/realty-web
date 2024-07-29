@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { BehaviorSubject, Observable, map, tap } from 'rxjs';
 import { Property } from '../properties-for-sale/propertiesModel';
 
 @Injectable({
@@ -8,6 +8,8 @@ import { Property } from '../properties-for-sale/propertiesModel';
 })
 export class PropertyService {
   private apiUrl = 'https://propertyflaskapp.onrender.com/api/v1';
+  public wishlist = new BehaviorSubject<Property[]>([]);
+  wishlist$ = this.wishlist.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -18,26 +20,50 @@ export class PropertyService {
   }
 
   fetchFavorites(username: string): Observable<Property[]> {
-    return this.http.get<Property[]>(`${this.apiUrl}/retrievefavorites`, {
-      params: { username }
-    });
-  }
+  return this.http.get<{ [key: string]: Property }>(`${this.apiUrl}/retrievefavorites`, {
+    params: { username }
+  }).pipe(
+    map(response => Object.values(response))
+  );
+}
 
-  addToWishlist(username: string, propertyName: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/addtowishlist`, { username, property_name: propertyName });
-  }
+  addToWishlist(username: string, property: Property): Observable<any> {
+  return this.http.post(`${this.apiUrl}/addtowishlist`, { 
+    user_name: username,
+    wishlist_property: property.property_name
+  }).pipe(
+    map(response => Object.values(response))
+  );
+}
 
-  removeFromWishlist(username: string, propertyName: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/removefromwishlist`, {
-      params: { username, property_name: propertyName }
-    });
-  }
+removeFromWishlist(username: string, propertyName: string): Observable<any> {
+  const params = new HttpParams()
+    .set('username', username)
+    .set('property_name', propertyName);
+  return this.http.delete(`${this.apiUrl}/removefromwishlist`, { params }).pipe(tap(() => {
+    const currentWishlist = this.wishlist.value;
+    this.wishlist.next(currentWishlist.filter(property => property.property_name !== propertyName))
+  }))
+}
 
   storeProperty(formData: FormData): Observable<any> {
     return this.http.post(`${this.apiUrl}/storepost`, formData)
   }
 
-  updateWishlistStatus(username: string, propertyName: string, wishlist: boolean): Observable<any> {
-  return this.http.patch(`${this.apiUrl}/updatewishlist`, { username, propertyName, wishlist });
+  updateWishlistStatus(username: string, property: Property, wishlist: boolean): Observable<any> {
+  const propertyName = property.property_name;
+  const params = new HttpParams()
+    .set('username', username)
+    .set('property_name', propertyName);
+
+  if (wishlist) {
+    return this.addToWishlist(username, property);
+  } else {
+    return this.removeFromWishlist(username, propertyName);
   }
+}
+
+isInWishlist(propertyName: string): boolean {
+  return this.wishlist.value.some(property => property.property_name === propertyName)
+}
 }

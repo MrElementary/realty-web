@@ -3,11 +3,17 @@ import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { NavigationButtonsComponent } from '../homepage/navigation-buttons/navigation-buttons.component';
 
 @Component({
   selector: 'app-contact-us',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterModule],
+  imports: [CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    RouterModule,
+    NavigationButtonsComponent
+  ],
   templateUrl: './contact-us.component.html',
   styleUrl: './contact-us.component.css'
 })
