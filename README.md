@@ -2,6 +2,8 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.6.
 
+It's the front-end of a web application for posting real estate homes for sale and works hand in hand with this [Flask App](https://github.com/MrElementary/propertyflaskapp) as the backend to serve information stored in a database using PostgreSQL, all of which was hosted on Render as part of my initial testing.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
